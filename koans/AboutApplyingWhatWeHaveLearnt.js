@@ -103,26 +103,123 @@ describe("About Applying What We Have Learnt", function() {
 
   /*********************************************************************************/
   /* UNCOMMENT FOR ADVANCED */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
+  it("should find the largest prime factor of a composite number", function (num) {
+    var is_prime = function (num) {
+      for (var i = 2; i<num; i++) {
+        if (num % i === 0) {
+          return false;
+        }
+      }
 
+      return true;
+    }
+
+    var largestPrime = 0;
+
+    for (var i = 2; i<=num; i++) {
+      if (is_prime(num)) {
+        largestPrime = num;
+      }
+    }
+    return largestPrime;
   });
 
-  it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
+  it("should find the largest palindrome made from the product of two 3 digit numbers", function (threeDigitNum1, threeDigitNum2) {
+    //should find the largest palindrome made from the product of two 3 digit numbers
+    var assortments = [];
+    var i = 0;
+    var j = i + 1;
+    var longestPalindrome = '';
 
+    var isPalindrome = function (string) {
+      var reversed = string.split('').reverse().join('');
+
+      return string === reversed;
+    };
+
+    var product = threeDigitNum1 * threeDigitNum2;
+    var productString = product.toString();
+
+      while (i < productString.length) {
+        while (j <= productString.length) {
+          if (assortments.indexOf(productString.slice(i, j)) === -1) {
+            assortments.push(productString.slice(i, j));
+          }
+          j += 1;
+        }
+
+        i += 1;
+        j = i + 1;
+      }
+
+      assortments.forEach(function(string) {
+        if (isPalindrome(string) && (string.length > longestPalindrome.length)) {
+          longestPalindrome = string;
+        }
+      });
+
+      return longestPalindrome;
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
+    var result = false;
+    var divisibleby1to20 = function (num) {
+      for (var divisor = 1; divisor <= 20; divisor++) {
+        if (num % divisor !== 0) {return false;}
+      }
+      return true;
+    }
 
-
+    var i = 0;
+    while (result === false) {
+      i += 20;
+      result = divisibleby1to20(i);
+    }
+    return i;
   });
 
-  it("should find the difference between the sum of the squares and the square of the sums", function () {
 
+  it("should find the difference between the sum of the squares and the square of the sums", function () {
+    var num = 10; // num is set here, b/c it looks like the TDD is set up to not expect arguments
+    var range = [];
+    for (var i = 1; i<=num;i++) {
+      range.push(i);
+    }
+    debugger;
+
+    var sumOfSquares = function (num) {
+      var squaredRange = range.map(function (item) {return item*item;});
+      return squaredRange.reduce(function(acc, curr) {return acc + curr;});
+    };
+
+    var squareOfSums = function (num) {
+      var sum = range.reduce(function(acc, curr) {return acc + curr;});
+      return sum * sum;
+    };
+
+    return sumOfSquares(num) - squareOfSums(num);
   });
 
   it("should find the 10001st prime", function () {
+    var is_prime = function (num) {
+      for (var i = 2; i<num; i++) {
+        if (num % i === 0) {
+          return false;
+        }
+      }
 
+      return true;
+    }
+
+    var largestPrime = 0;
+    var count = 0;
+
+    for (var i = 2; count < 10001; i++) {
+      if (is_prime(i)) {
+        largestPrime = i;
+        count += 1;
+      }
+    }
+    return largestPrime;
   });
-  */
 });
